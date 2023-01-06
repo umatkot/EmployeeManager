@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="EmployeeManager.Main.View.EmployeeFilterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewmodel="clr-namespace:EmployeeManager.Main.ViewModel" 
+             d:DataContext="{d:DesignInstance Type=viewmodel:EmployeeViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" Width="200">
+    <Grid>
+        <StackPanel Background="#FF591010">
+            <Label Content="Отдел" FontSize="18" FontFamily="Segoe UI Semibold" Foreground="#FF13B14F"/>
+            <ComboBox Name="cbDepartmentFilterSource"
+                Margin="15,5,15,0"
+                      DisplayMemberPath="Name"
+                      SelectedValuePath="Id"
+                      ItemsSource="{Binding DepartmentList}"
+                      SelectedItem="{Binding Department}"
+                      SelectedValue="{Binding Department}"
+            />
+            <StackPanel x:Name="sp" DataContext="{Binding Employee}">
+                <Label Content="Текущий сотрудник" FontSize="18" FontFamily="Segoe UI Semibold" Foreground="Aquamarine"/>
+                <TextBlock Text="{Binding FirstName}" Foreground="Aquamarine"/>
+                <TextBlock Text="{Binding DepartmentName}" Foreground="Aquamarine"/>
+            </StackPanel>
+            <!--<ComboBox Margin="15,5,15,0"
+                      DisplayMemberPath="FirstName"
+                      SelectedValuePath="Id" 
+                      ItemsSource="{Binding DepartmentsList}" 
+                      SelectedValue="{Binding CurrentDepartment}" 
+                      SelectedItem="{Binding CurrentDepartment}"
+            />-->
+        </StackPanel>
+    </Grid>
+</UserControl>

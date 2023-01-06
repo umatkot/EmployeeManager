@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EXPORT xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <EMPLOYEE>
+    <DEPARTMENT>Тестовый отдел</DEPARTMENT>
+    <DATA>
+      <FIRSTNAME>Имя</FIRSTNAME>
+      <MIDDLENAME>Отчество</MIDDLENAME>
+      <LASTNAME>Фамилия</LASTNAME>
+      <DATEBIRTH>01.11.2001</DATEBIRTH>
+      <POSITION>Тестовая должность</POSITION>
+      <PHONE>+7812 123456</PHONE>
+      <EMAIL>test@mail.org</EMAIL>
+    </DATA>
+  </EMPLOYEE>
+</EXPORT>

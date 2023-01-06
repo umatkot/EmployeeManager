@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EmployeeDbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="EmployeeDbModelStoreContainer">
+    <EntitySet Name="Departments" EntityType="EmployeeDbModel.Store.Departments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Employeers" EntityType="EmployeeDbModel.Store.Employeers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HistoryLevelSet" EntityType="EmployeeDbModel.Store.HistoryLevelSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK__Employeer__Depar__398D8EEE" Association="EmployeeDbModel.Store.FK__Employeer__Depar__398D8EEE">
+      <End Role="Departments" EntitySet="Departments" />
+      <End Role="Employeers" EntitySet="Employeers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Departments">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Employeers">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Department" Type="int" Nullable="true" />
+    <Property Name="FirstName" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="MiddleName" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="LastName" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="DateBirth" Type="datetime" Nullable="true" />
+    <Property Name="Position" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="Phone" Type="nvarchar" Nullable="true" MaxLength="10" />
+    <Property Name="Email" Type="nvarchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="HistoryLevelSet">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TableName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RecordId" Type="int" Nullable="false" />
+    <Property Name="InsertMode" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Employeer__Depar__398D8EEE">
+    <End Role="Departments" Type="EmployeeDbModel.Store.Departments" Multiplicity="0..1" />
+    <End Role="Employeers" Type="EmployeeDbModel.Store.Employeers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departments">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Employeers">
+        <PropertyRef Name="Department" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

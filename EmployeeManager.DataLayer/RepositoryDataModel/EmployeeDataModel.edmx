@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EmployeeDbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="EmployeeDbModelStoreContainer">
+    <EntitySet Name="Departments" EntityType="EmployeeDbModel.Store.Departments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Employeers" EntityType="EmployeeDbModel.Store.Employeers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HistoryLevelSet" EntityType="EmployeeDbModel.Store.HistoryLevelSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK__Employeer__Depar__398D8EEE" Association="EmployeeDbModel.Store.FK__Employeer__Depar__398D8EEE">
+      <End Role="Departments" EntitySet="Departments" />
+      <End Role="Employeers" EntitySet="Employeers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Departments">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Employeers">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Department" Type="int" Nullable="true" />
+    <Property Name="FirstName" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="MiddleName" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="LastName" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="DateBirth" Type="datetime" Nullable="true" />
+    <Property Name="Position" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="Phone" Type="nvarchar" Nullable="true" MaxLength="20" />
+    <Property Name="Email" Type="nvarchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="HistoryLevelSet">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TableName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RecordId" Type="int" Nullable="false" />
+    <Property Name="InsertMode" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Employeer__Depar__398D8EEE">
+    <End Role="Departments" Type="EmployeeDbModel.Store.Departments" Multiplicity="0..1" />
+    <End Role="Employeers" Type="EmployeeDbModel.Store.Employeers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departments">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Employeers">
+        <PropertyRef Name="Department" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EmployeeDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" annotation:StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employeers" Relationship="Self.FK__Employeer__Depar__398D8EEE" FromRole="Departments" ToRole="Employeers" />
+        </EntityType>
+        <EntityType Name="Employeers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Department" Type="Int32" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DateBirth" Type="DateTime" Precision="0" />
+          <Property Name="Position" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Departments" Relationship="Self.FK__Employeer__Depar__398D8EEE" FromRole="Employeers" ToRole="Departments" />
+        </EntityType>
+        <Association Name="FK__Employeer__Depar__398D8EEE">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="Employeers" Type="Self.Employeers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Employeers">
+              <PropertyRef Name="Department" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EmployeeDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Departments" EntityType="Self.Departments" />
+          <EntitySet Name="Employeers" EntityType="Self.Employeers" />
+          <AssociationSet Name="FK__Employeer__Depar__398D8EEE" Association="Self.FK__Employeer__Depar__398D8EEE">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Employeers" EntitySet="Employeers" />
+          </AssociationSet>
+          <EntitySet Name="HistoryLevelSet" EntityType="EmployeeDbModel.HistoryLevel" />
+        </EntityContainer>
+        <EntityType Name="HistoryLevel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TableName" Type="String" Nullable="false" />
+          <Property Name="RecordId" Type="Int32" Nullable="false" />
+          <Property Name="InsertMode" Type="Boolean" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EmployeeDbModelStoreContainer" CdmEntityContainer="EmployeeDbEntities">
+    <EntitySetMapping Name="Departments">
+      <EntityTypeMapping TypeName="IsTypeOf(EmployeeDbModel.Departments)">
+        <MappingFragment StoreEntitySet="Departments">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employeers">
+      <EntityTypeMapping TypeName="IsTypeOf(EmployeeDbModel.Employeers)">
+        <MappingFragment StoreEntitySet="Employeers">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="DateBirth" ColumnName="DateBirth" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HistoryLevelSet">
+      <EntityTypeMapping TypeName="IsTypeOf(EmployeeDbModel.HistoryLevel)">
+        <MappingFragment StoreEntitySet="HistoryLevelSet">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TableName" ColumnName="TableName" />
+          <ScalarProperty Name="RecordId" ColumnName="RecordId" />
+          <ScalarProperty Name="InsertMode" ColumnName="InsertMode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
